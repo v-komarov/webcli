@@ -46,11 +46,35 @@
 </div>
 
 
-<ul class="list-inline">
-    %for i in macs:
-    <li class="list-inline-item">{{i[0]}}</li>
-    %end
-</ul>
+<div class="row">
+
+
+<table class="table table-bordered table-sm" style="margin-top:40px;">
+
+    <thead>
+    <tr class="table-secondary">
+         <th score="cal">Дата, время</th>
+         <th score="cal">MAC</th>
+    </tr>
+    </thead>
+
+    <tbody>
+          %for row in macs:
+          <tr>
+          <td>{{row[1]}}</td>
+          <td>{{row[0]}}</td>
+          </tr>
+          %end
+    </tbody>
+
+</table>
+
+
+
+</div>
+
+
+
 
 
 

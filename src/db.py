@@ -59,3 +59,11 @@ def getradomip():
     data = cur.fetchone()[0]
     return data
 
+
+def getmacs():
+    """Getting temperrary macs"""
+    cur = conn.cursor()
+    cur.execute("SELECT date_time,mac FROM macs_tmp ORDER BY date_time DESC")
+    data = cur.fetchall()
+    return data
+
