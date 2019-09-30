@@ -4,7 +4,7 @@ import os
 
 auth_service = os.environ.get('AUTH_SERVICE','10.6.0.22:8000/begin/jsondata/')
 
-mysql_host = os.environ.get('MYSQL_HOST', 'localhost')
+mysql_host = os.environ.get('MYSQL_HOST', '127.0.0.1')
 
 mysql_user = os.environ.get('MYSQL_USER', 'freeradius')
 

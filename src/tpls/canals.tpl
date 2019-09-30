@@ -5,13 +5,13 @@
 
 <ul class="nav nav-tabs">
   <li class="nav-item">
-    <a class="nav-link href="/radtest">Radtest</a>
+    <a class="nav-link" href="/radtest">Radtest</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="/canal">Коммерческие</a>
+    <a class="nav-link active" href="#">Коммерческие</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" active href="#">Общедоступные</a>
+    <a class="nav-link" href="/canalfree">Общедоступные</a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="macs">Добавленные MAC</a>
@@ -29,18 +29,43 @@
 
 <div class="row">
 
-<form method='POST' action="/radtest" style="margin-top:20px;margin-left:30px;">
+<div class="col">
+<form method='POST' action="/canal" style="margin-top:20px;margin-left:30px;">
     <dl class="row">
-        <dt><label for="username">MAC адрес</label></dt>
+        <dt><label for="username">IP адрес</label></dt>
         <dd><input type="text" class="form-control form-control-sm" id="username" name="username" style="margin-left:20px;"></dd>
     </dl>
     <dl class="row">
-        <dt><button type="submit" class="btn btn-outline-primary btn-sm">Тестировать</button></dt>
+        <dt><button type="submit" class="btn btn-outline-primary btn-sm">Добавить</button></dt>
         <dd></dd>
      </dl>
 </form>
+</div>
+
+
+<div class="col">
+<form method='POST' action="/canal" style="margin-top:20px;margin-left:30px;">
+    <dl class="row">
+        <dt><label for="username">IP адрес</label></dt>
+        <dd><input type="text" class="form-control form-control-sm" id="username" name="username" style="margin-left:20px;"></dd>
+    </dl>
+    <dl class="row">
+        <dt><button type="submit" class="btn btn-outline-primary btn-sm">Удалить</button></dt>
+        <dd></dd>
+     </dl>
+</form>
+</div>
+
+
 
 </div>
+
+
+<ul class="list-inline">
+    %for i in canals:
+    <li class="list-inline-item">{{i[0]}}</li>
+    %end
+</ul>
 
 
 

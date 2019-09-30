@@ -5,19 +5,19 @@
 
 <ul class="nav nav-tabs">
   <li class="nav-item">
-    <a class="nav-link active href="/radtest">Radtest</a>
+    <a class="nav-link active href="#">Radtest</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="canal">Коммерческие</a>
+    <a class="nav-link" href="/canal">Коммерческие</a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="/canalfree">Общедоступные</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="macs">Добавленные MAC</a>
+    <a class="nav-link" href="/macs">Добавленные MAC</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="log">Лог</a>
+    <a class="nav-link" href="/log">Лог</a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="/exit">Выход</a>
