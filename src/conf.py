@@ -1,0 +1,14 @@
+#coding:utf-8
+
+import os
+
+auth_service = os.environ.get('AUTH_SERVICE','10.6.0.22:8000/begin/jsondata/')
+
+mysql_host = os.environ.get('MYSQL_HOST', 'localhost')
+
+mysql_user = os.environ.get('MYSQL_USER', 'freeradius')
+
+mysql_passwd = os.environ.get('MYSQL_PASSWORD', 'freeradius')
+
+mysql_db = os.environ.get('MYSQL_DB', 'radius')
+
