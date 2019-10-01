@@ -1,11 +1,13 @@
-DROP PROCEDURE `beforeauth_work`;
+DROP PROCEDURE IF EXISTS `beforeauth_work`;
 DELIMITER ;;
 CREATE DEFINER=`freeradius`@`%` PROCEDURE `beforeauth_work`(IN v_ip VARCHAR(15),IN v_login VARCHAR(64))
 BEGIN
 
 	DECLARE before_check INT DEFAULT 0;
 	DECLARE before_packets INT DEFAULT 0;
+        DECLARE mactmp INT DEFAULT 0;
 
+        SELECT count(*) INTO mactmp FROM macs_tmp WHERE mac = v_login;
 	select count(*) into before_check from radfreecharge as rad where rad.ip = v_ip;
 	SELECT count(*) into before_packets 
 	FROM radbilling as rad_b
@@ -16,7 +18,7 @@ BEGIN
 		AND rad_b.date1 <= CURDATE() 
 		AND (rad_b.date2 >= CURDATE() OR rad_b.date2 IS NULL);
 
-	IF ( before_check > 0 OR before_packets > 0) THEN
+	IF ( before_check > 0 OR before_packets > 0 OR mactmp > 0 ) THEN
 
 		(select 2 as id, v_login as username, 'Cleartext-Password' as attribute, v_login as value, ':=' as op)
 		union

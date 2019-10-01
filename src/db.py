@@ -14,6 +14,7 @@ def get_canals_free():
     cur = conn.cursor()
     cur.execute("SELECT ip FROM radfreecharge ORDER BY ip")
     data = cur.fetchall()
+    cur.close()
     return data
 
 
@@ -23,6 +24,7 @@ def get_canals():
     cur = conn.cursor()
     cur.execute("SELECT value FROM radpackets WHERE pid=0 ORDER BY value")
     data = cur.fetchall()
+    cur.close()
     return data
 
 
@@ -33,6 +35,7 @@ def wlog(user, note):
     cur = conn.cursor()
     cur.execute("""INSERT user_logs(date_time,username,action) VALUES(%s,%s,%s);""", (now,user,note))
     conn.commit()
+    cur.close()
     return 'Ok'
 
 
@@ -41,6 +44,7 @@ def getlog():
     cur = conn.cursor()
     cur.execute("SELECT date_time,username,action FROM user_logs ORDER BY date_time DESC LIMIT 200")
     data = cur.fetchall()
+    cur.close()
     return data
 
 
@@ -50,6 +54,7 @@ def getfreerandomip():
     cur = conn.cursor()
     cur.execute("SELECT ip FROM radfreecharge ORDER BY RAND() LIMIT 1")
     data = cur.fetchone()[0]
+    cur.close()
     return data
 
 
@@ -58,6 +63,7 @@ def getrandomip():
     cur = conn.cursor()
     cur.execute("SELECT value FROM radpackets WHERE pid=0  ORDER BY RAND() LIMIT 1")
     data = cur.fetchone()[0]
+    cur.close()
     return data.split()[0]
 
 
@@ -66,6 +72,7 @@ def getmacs():
     cur = conn.cursor()
     cur.execute("SELECT date_time,mac FROM macs_tmp ORDER BY date_time DESC")
     data = cur.fetchall()
+    cur.close()
     return data
 
 
@@ -90,6 +97,7 @@ def addfreecanal(canal, username):
      
     wlog(username, "Добавление ip адресов общедоступных каналов: {}".format(canal))
 
+    cur.close()
     return 'Ok'
 
 
@@ -115,6 +123,7 @@ def delfreecanal(canal, username):
      
     wlog(username, "Удаление ip адресов общедоступных каналов: {}".format(canal))
 
+    cur.close()
     return 'Ok'
 
 
@@ -140,6 +149,7 @@ def addcanal(canal, username):
      
     wlog(username, "Добавление ip адресов коммерческих каналов: {}".format(canal))
 
+    cur.close()
     return 'Ok'
 
 
@@ -165,5 +175,17 @@ def delcanal(canal, username):
      
     wlog(username, "Удаление ip адресов коммерческих каналов: {}".format(canal))
 
+    cur.close()
     return 'Ok'
 
+
+
+def wmac(mac,username):
+    """Writing temperrary macs"""
+    cur = conn.cursor()
+    cur.execute("CALL writemac(%s,%s)", (mac,datetime.datetime.now()))
+
+    wlog(username, "Добавлен временный MAC адрес: {}".format(mac))
+
+    cur.close()
+    return 'Ok'

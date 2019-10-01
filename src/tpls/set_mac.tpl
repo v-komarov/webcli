@@ -30,10 +30,10 @@
 <div class="row">
 
 <div class="col">
-<form method='POST' action="/canal" style="margin-top:20px;margin-left:30px;">
+<form method='POST' action="/macs" style="margin-top:20px;margin-left:30px;">
     <dl class="row">
         <dt><label for="username">MAC</label></dt>
-        <dd><input type="text" class="form-control form-control-sm" id="username" name="username" style="margin-left:20px;"></dd>
+        <dd><input type="text" class="form-control form-control-sm" id="mac" name="mac" style="margin-left:20px;"></dd>
     </dl>
     <dl class="row">
         <dt><button type="submit" class="btn btn-outline-primary btn-sm">Добавить</button></dt>

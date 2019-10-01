@@ -18,7 +18,7 @@
        <div class="jumbotron jumbotron-fluid">
            <div class="container">
                <h1 class="display-6">Webcli</h1>
-               <p class="lead">Интерфейс управления iptv radius server</p>
+               <p class="lead">Интерфейс управления iptv radius server (авторизация по учетным записям Gamma)</p>
 
                <!-- Button trigger modal -->
                <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#ModalLong">

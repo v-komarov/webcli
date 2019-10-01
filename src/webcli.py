@@ -3,7 +3,7 @@
 import bottle
 from bottle import route, run, get, post, request, template, static_file, redirect
 from auth import auth as login
-from db import get_canals_free, get_canals, getlog, getmacs, addfreecanal, delfreecanal, addcanal, delcanal
+from db import get_canals_free, get_canals, getlog, getmacs, addfreecanal, delfreecanal, addcanal, delcanal, wmac
 from radtest import checkdata
 from beaker.middleware import SessionMiddleware
 
@@ -165,7 +165,6 @@ def canaldel():
     if chsess():
         ip = request.forms.get("ip")
         ip = ip.replace(" ","")
-        print ip
         if len(ip) > 6:
             delcanal(ip,getusername())
         redirect("/canal")
@@ -183,6 +182,20 @@ def macs():
         return template('tpls/set_mac.tpl', macs=getmacs())
     else:
         redirect("/auth")
+
+
+
+@post("/macs")
+def canaldel():
+    if chsess():
+        mac = request.forms.get("mac")
+        mac = mac.replace(" ","").replace(".","").replace(":","").replace("-","").upper()
+        if len(mac) == 12:
+            wmac(mac,getusername())
+        redirect("/macs")
+    else:
+        redirect("/auth")
+
 
 
 

@@ -37,7 +37,7 @@ def test_writing_log_pre():
     """Checking writing log"""
     conn = MySQLdb.connect(host = mysql_host, user = mysql_user, passwd = mysql_passwd, db = mysql_db)
     cur = conn.cursor()
-    cur.execute("DELETE FROM user_logs WHERE username='testuser'")
+    cur.execute("DELETE FROM user_logs")
     conn.commit()
     cur.execute("SELECT count(*) FROM user_logs")
     assert cur.fetchone()[0] == 0
@@ -49,7 +49,7 @@ def test_writing_log():
     wlog('testuser','xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
     conn = MySQLdb.connect(host = mysql_host, user = mysql_user, passwd = mysql_passwd, db = mysql_db)
     cur = conn.cursor()
-    cur.execute("SELECT count(*) FROM user_logs")
+    cur.execute("SELECT count(*) FROM user_logs WHERE username='testuser'")
     assert cur.fetchone()[0] == 1
 
 
@@ -68,7 +68,7 @@ def test_writing_mac():
     """Checking writing mac"""
     conn = MySQLdb.connect(host = mysql_host, user = mysql_user, passwd = mysql_passwd, db = mysql_db)
     cur = conn.cursor()
-    cur.execute("""INSERT INTO macs_tmp(mac,date_time) VALUES(%s,%s)""", ('08C6B32B3D03',datetime.datetime.now()))
+    cur.execute("""CALL writemac(%s,%s)""", ('08C6B32B3D04',datetime.datetime.now()))
     conn.commit()
     cur.execute("SELECT count(*) FROM macs_tmp")
     assert cur.fetchone()[0] == 1
