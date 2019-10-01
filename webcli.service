@@ -1,0 +1,10 @@
+[Unit]
+Description=Web client of iptv radius server
+After=freeradiusdb.service
+Requires=freeradiusdb.service
+
+[Service]
+ExecStart=/usr/bin/docker start webcli
+
+[Install]
+WantedBy=multi-user.target
