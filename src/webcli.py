@@ -4,6 +4,7 @@ import bottle
 from bottle import route, run, get, post, request, template, static_file, redirect
 from auth import auth as login
 from db import get_canals_free, get_canals, getlog, getmacs
+from radtest import checkdata
 from beaker.middleware import SessionMiddleware
 
 
@@ -46,7 +47,7 @@ def server_static(filename):
 @get("/")
 def authform():
     if chsess():
-        return template('tpls/radtest.tpl')
+        return template('tpls/radtest.tpl', data = [])
     else:
         redirect("/auth")
 
@@ -65,7 +66,7 @@ def authuser():
     if login(username,password):
         session = bottle.request.environ['beaker.session']
         session["username"] = username
-        return template('tpls/radtest.tpl')
+        return template('tpls/radtest.tpl', data = [])
     else:
         return template('tpls/auth.tpl')  
 
@@ -74,16 +75,21 @@ def authuser():
 @post("/radtest")
 def radtest():
     if chsess():
-        return template('tpls/radtest.tpl')
+        mac = request.forms.get("mac")
+        mac = mac.replace(" ","").replace(":","").replace("-","").replace(".","").upper()
+        if mac == "":
+            return template('tpls/radtest.tpl', data = [])
+        else:
+            return template('tpls/radtest.tpl', data = checkdata(mac))
     else:
-        return template('tpls/auth.tpl')
+        redirect("/auth")
 
 
 
 @get("/radtest")
 def radtest():
 
-    return template('tpls/radtest.tpl')
+    return template('tpls/radtest.tpl', data = [])
 
 
 

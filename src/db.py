@@ -44,7 +44,7 @@ def getlog():
 
 
 
-def getfreeradomip():
+def getfreerandomip():
     """Getting random ip free canal"""
     cur = conn.cursor()
     cur.execute("SELECT ip FROM radfreecharge ORDER BY RAND() LIMIT 1")
@@ -52,12 +52,12 @@ def getfreeradomip():
     return data
 
 
-def getradomip():
+def getrandomip():
     """Getting random ip canal"""
     cur = conn.cursor()
     cur.execute("SELECT value FROM radpackets WHERE pid=0  ORDER BY RAND() LIMIT 1")
     data = cur.fetchone()[0]
-    return data
+    return data.split()[0]
 
 
 def getmacs():
