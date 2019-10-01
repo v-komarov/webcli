@@ -15,3 +15,4 @@ mysql_db = os.environ.get('MYSQL_DB', 'radius')
 radtest_host = os.environ.get('RADTEST_HOST', '127.0.0.1')
 
 radtest_port = os.environ.get('RADTEST_PORT', '8080')
+

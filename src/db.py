@@ -94,6 +94,7 @@ def addfreecanal(canal, username):
 
 
 
+
 def delfreecanal(canal, username):
     """Deleting free canal"""
     cur = conn.cursor()
@@ -113,6 +114,56 @@ def delfreecanal(canal, username):
             ip += 1
      
     wlog(username, "Удаление ip адресов общедоступных каналов: {}".format(canal))
+
+    return 'Ok'
+
+
+
+
+def addcanal(canal, username):
+    """Adding canal"""
+    cur = conn.cursor()
+    ips = canal.split("-")
+    if len(ips) == 1: 
+        cur.execute("CALL writecanal(%s)", (ips[0],))
+        conn.commit()
+
+    if len(ips) == 2:
+        ip = ipaddress.ip_address(ips[0].decode("utf-8"))
+        ip_end = ipaddress.ip_address(ips[1].decode("utf-8"))
+
+        while ip <= ip_end:
+
+            cur.execute("CALL writecanal(%s)", (str(ip),))
+            conn.commit()
+            ip += 1
+     
+    wlog(username, "Добавление ip адресов коммерческих каналов: {}".format(canal))
+
+    return 'Ok'
+
+
+
+
+def delcanal(canal, username):
+    """Deleting canal"""
+    cur = conn.cursor()
+    ips = canal.split("-")
+    if len(ips) == 1: 
+        cur.execute("DELETE FROM radpackets WHERE value=%s AND pid=0", (ips[0],))
+        conn.commit()
+
+    if len(ips) == 2:
+        ip = ipaddress.ip_address(ips[0].decode("utf-8"))
+        ip_end = ipaddress.ip_address(ips[1].decode("utf-8"))
+
+        while ip <= ip_end:
+
+            cur.execute("DELETE FROM radpackets WHERE value=%s AND pid=0", (str(ip),))
+            conn.commit()
+            ip += 1
+     
+    wlog(username, "Удаление ip адресов коммерческих каналов: {}".format(canal))
 
     return 'Ok'
 

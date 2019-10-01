@@ -3,7 +3,7 @@
 import bottle
 from bottle import route, run, get, post, request, template, static_file, redirect
 from auth import auth as login
-from db import get_canals_free, get_canals, getlog, getmacs, addfreecanal, delfreecanal
+from db import get_canals_free, get_canals, getlog, getmacs, addfreecanal, delfreecanal, addcanal, delcanal
 from radtest import checkdata
 from beaker.middleware import SessionMiddleware
 
@@ -124,7 +124,7 @@ def canalfree():
 
 
 @post("/canalfreedel")
-def canalfree():
+def canalfreedel():
     if chsess():
         ip = request.forms.get("ip")
         ip = ip.replace(" ","")
@@ -139,11 +139,40 @@ def canalfree():
 
 
 @get("/canal")
-def canalfree():
+def canal():
     if chsess():
         return template('tpls/canals.tpl', canals=get_canals())
     else:
         redirect("/auth")
+
+
+
+@post("/canal")
+def canal():
+    if chsess():
+        ip = request.forms.get("ip")
+        ip = ip.replace(" ","")
+        if len(ip) > 6:
+            addcanal(ip,getusername())
+        redirect("/canal")
+    else:
+        redirect("/auth")
+
+
+
+@post("/canaldel")
+def canaldel():
+    if chsess():
+        ip = request.forms.get("ip")
+        ip = ip.replace(" ","")
+        print ip
+        if len(ip) > 6:
+            delcanal(ip,getusername())
+        redirect("/canal")
+    else:
+        redirect("/auth")
+
+
 
 
 
