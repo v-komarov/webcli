@@ -33,7 +33,7 @@
 <form method='POST' action="/canalfree" style="margin-top:20px;margin-left:30px;">
     <dl class="row">
         <dt><label for="username">IP адрес</label></dt>
-        <dd><input type="text" class="form-control form-control-sm" id="username" name="username" style="margin-left:20px;"></dd>
+        <dd><input type="text" class="form-control form-control-sm" id="ip" name="ip" style="margin-left:20px;"></dd>
     </dl>
     <dl class="row">
         <dt><button type="submit" class="btn btn-outline-primary btn-sm">Добавить</button></dt>
@@ -44,10 +44,10 @@
 
 
 <div class="col">
-<form method='POST' action="/canalfree" style="margin-top:20px;margin-left:30px;">
+<form method='POST' action="/canalfreedel" style="margin-top:20px;margin-left:30px;">
     <dl class="row">
         <dt><label for="username">IP адрес</label></dt>
-        <dd><input type="text" class="form-control form-control-sm" id="username" name="username" style="margin-left:20px;"></dd>
+        <dd><input type="text" class="form-control form-control-sm" id="ip" name="ip" style="margin-left:20px;"></dd>
     </dl>
     <dl class="row">
         <dt><button type="submit" class="btn btn-outline-primary btn-sm">Удалить</button></dt>

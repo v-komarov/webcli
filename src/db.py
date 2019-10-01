@@ -1,6 +1,7 @@
 #coding:utf-8
 
 import datetime
+import ipaddress
 import MySQLdb
 from conf import mysql_host, mysql_user, mysql_passwd, mysql_db
 
@@ -66,4 +67,52 @@ def getmacs():
     cur.execute("SELECT date_time,mac FROM macs_tmp ORDER BY date_time DESC")
     data = cur.fetchall()
     return data
+
+
+
+def addfreecanal(canal, username):
+    """Adding free canal"""
+    cur = conn.cursor()
+    ips = canal.split("-")
+    if len(ips) == 1: 
+        cur.execute("CALL writefreecanal(%s)", (ips[0],))
+        conn.commit()
+
+    if len(ips) == 2:
+        ip = ipaddress.ip_address(ips[0].decode("utf-8"))
+        ip_end = ipaddress.ip_address(ips[1].decode("utf-8"))
+
+        while ip <= ip_end:
+
+            cur.execute("CALL writefreecanal(%s)", (str(ip),))
+            conn.commit()
+            ip += 1
+     
+    wlog(username, "Добавление ip адресов общедоступных каналов: {}".format(canal))
+
+    return 'Ok'
+
+
+
+def delfreecanal(canal, username):
+    """Deleting free canal"""
+    cur = conn.cursor()
+    ips = canal.split("-")
+    if len(ips) == 1: 
+        cur.execute("DELETE FROM radfreecharge WHERE ip=%s", (ips[0],))
+        conn.commit()
+
+    if len(ips) == 2:
+        ip = ipaddress.ip_address(ips[0].decode("utf-8"))
+        ip_end = ipaddress.ip_address(ips[1].decode("utf-8"))
+
+        while ip <= ip_end:
+
+            cur.execute("DELETE FROM radfreecharge WHERE ip=%s", (str(ip),))
+            conn.commit()
+            ip += 1
+     
+    wlog(username, "Удаление ip адресов общедоступных каналов: {}".format(canal))
+
+    return 'Ok'
 
