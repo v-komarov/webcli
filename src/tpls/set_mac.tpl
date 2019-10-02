@@ -53,8 +53,8 @@
 
     <thead>
     <tr class="table-secondary">
-         <th score="cal">Дата, время</th>
          <th score="cal">MAC</th>
+         <th score="cal">Дата, время</th>
     </tr>
     </thead>
 

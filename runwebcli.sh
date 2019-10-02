@@ -6,4 +6,4 @@
 --link freeradiusdb:mysql \
 -e MYSQL_HOST=mysql \
 -e RADTEST_HOST=10.6.2.251 \
-webcli:first
+webcli:second

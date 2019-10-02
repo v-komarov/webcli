@@ -1,3 +1,3 @@
 #!/bin/sh
 
-docker build -t webcli:first .
+docker build -t webcli:second .
