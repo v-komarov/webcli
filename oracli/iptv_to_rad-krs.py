@@ -11,7 +11,7 @@ DB_DATABASE="radius"
 
 print 'start: ', datetime.datetime.now()
 
-daybefore = datetime.datetime.now() - datetiem.timedelta(days=1)
+daybefore = datetime.datetime.now() - datetime.timedelta(days=1)
 
 
 try:
