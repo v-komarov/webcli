@@ -1,3 +1,3 @@
 #!/bin/sh
 
-docker build -t webcli:second .
+docker build -t webcli:forth .

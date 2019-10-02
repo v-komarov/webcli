@@ -79,7 +79,7 @@ def authuser():
 
 
 @post("/radtest")
-def radtest():
+def radtest2():
     if chsess():
         mac = request.forms.get("mac")
         mac = mac.replace(" ","").replace(":","").replace("-","").replace(".","").upper()
@@ -110,7 +110,7 @@ def canalfree():
 
 
 @post("/canalfree")
-def canalfree():
+def canalfree2():
     if chsess():
         ip = request.forms.get("ip")
         ip = ip.replace(" ","")
@@ -148,7 +148,7 @@ def canal():
 
 
 @post("/canal")
-def canal():
+def canal2():
     if chsess():
         ip = request.forms.get("ip")
         ip = ip.replace(" ","")
@@ -186,7 +186,7 @@ def macs():
 
 
 @post("/macs")
-def canaldel():
+def macs2():
     if chsess():
         mac = request.forms.get("mac")
         mac = mac.replace(" ","").replace(".","").replace(":","").replace("-","").upper()
@@ -200,7 +200,7 @@ def canaldel():
 
 
 @get("/log")
-def macs():
+def log():
     if chsess():
         return template('tpls/logs.tpl', data=getlog())
     else:
@@ -220,9 +220,7 @@ def exit():
 
 
 if __name__ == "__main__":
-    run(app=app, host="", port=5000)
-    
-    
-#app = bottle.default_app()
+    run(app=app, host="0.0.0.0", port=5000, debug=True, reloader=True)
+
 
 

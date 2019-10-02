@@ -10,4 +10,4 @@ RUN apt-get update \
  && pip install pytest
 EXPOSE 5000
 
-CMD ["python","webcli.py"]
+CMD ["python", "webcli:app"]
