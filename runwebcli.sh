@@ -5,4 +5,5 @@
 --link freeradiusdb:mysql \
 -e MYSQL_HOST=mysql \
 -e RADTEST_HOST=10.6.2.251 \
-webcli:seventh
+-e RADIUS_NAME=krsk-iptv-radius1 \
+webcli:eight
