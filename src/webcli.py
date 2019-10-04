@@ -6,6 +6,7 @@ from auth import auth as login
 from db import get_canals_free, get_canals, getlog, getmacs, addfreecanal, delfreecanal, addcanal, delcanal, wmac
 from radtest import checkdata
 from beaker.middleware import SessionMiddleware
+from conf import radius_name
 
 
 
@@ -53,7 +54,7 @@ def server_static(filename):
 @get("/")
 def authform():
     if chsess():
-        return template('tpls/radtest.tpl', data = [])
+        return template('tpls/radtest.tpl', data = [], radius=radius_name)
     else:
         redirect("/auth")
 
@@ -61,7 +62,7 @@ def authform():
 
 @get("/auth")
 def auth():
-    return template("tpls/auth.tpl")
+    return template("tpls/auth.tpl", radius=radius_name)
 
 
 
@@ -72,9 +73,9 @@ def authuser():
     if login(username,password):
         session = bottle.request.environ['beaker.session']
         session["username"] = username
-        return template('tpls/radtest.tpl', data = [])
+        return template('tpls/radtest.tpl', data = [], radius=radius_name)
     else:
-        return template('tpls/auth.tpl')  
+        return template('tpls/auth.tpl', radius=radius_name)  
 
 
 
@@ -84,9 +85,9 @@ def radtest2():
         mac = request.forms.get("mac")
         mac = mac.replace(" ","").replace(":","").replace("-","").replace(".","").upper()
         if mac == "":
-            return template('tpls/radtest.tpl', data = [])
+            return template('tpls/radtest.tpl', data = [], radius=radius_name)
         else:
-            return template('tpls/radtest.tpl', data = checkdata(mac))
+            return template('tpls/radtest.tpl', data = checkdata(mac), radius=radius_name)
     else:
         redirect("/auth")
 
@@ -95,7 +96,7 @@ def radtest2():
 @get("/radtest")
 def radtest():
 
-    return template('tpls/radtest.tpl', data = [])
+    return template('tpls/radtest.tpl', data = [], radius=radius_name)
 
 
 
@@ -103,7 +104,7 @@ def radtest():
 @get("/canalfree")
 def canalfree():
     if chsess():
-        return template('tpls/canals_free.tpl', canals=get_canals_free())
+        return template('tpls/canals_free.tpl', canals=get_canals_free(), radius=radius_name)
     else:
         redirect("/auth")
 
@@ -141,7 +142,7 @@ def canalfreedel():
 @get("/canal")
 def canal():
     if chsess():
-        return template('tpls/canals.tpl', canals=get_canals())
+        return template('tpls/canals.tpl', canals=get_canals(), radius=radius_name)
     else:
         redirect("/auth")
 
@@ -179,7 +180,7 @@ def canaldel():
 @get("/macs")
 def macs():
     if chsess():
-        return template('tpls/set_mac.tpl', macs=getmacs())
+        return template('tpls/set_mac.tpl', macs=getmacs(), radius=radius_name)
     else:
         redirect("/auth")
 
@@ -202,7 +203,7 @@ def macs2():
 @get("/log")
 def log():
     if chsess():
-        return template('tpls/logs.tpl', data=getlog())
+        return template('tpls/logs.tpl', data=getlog(), radius=radius_name)
     else:
         redirect("/auth")
 
@@ -220,7 +221,7 @@ def exit():
 
 
 if __name__ == "__main__":
-    run(app=app, host="0.0.0.0", port=5000, debug=True, reloader=True)
+    run(app=app, host="0.0.0.0", port=5050)
 
 
 

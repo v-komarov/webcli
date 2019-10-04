@@ -16,3 +16,4 @@ radtest_host = os.environ.get('RADTEST_HOST', '127.0.0.1')
 
 radtest_port = os.environ.get('RADTEST_PORT', '8080')
 
+radius_name = os.environ.get('RADIUS_NAME', 'FREERADIUS')
